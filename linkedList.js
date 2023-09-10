@@ -1,28 +1,30 @@
 class Node {
-  constructor(value = null, next = null, parent = null) {
+  constructor(value = null, parent = null) {
     this.value = value;
-    this.next = next;
     this.parent = parent;
   }
 }
 
 class LinkedList {
-  constructor(headValue, next) {
-    this.head = new Node(headValue, next);
+  constructor(headValue) {
+    this.head = new Node(headValue);
     this.tail = this.head;
   }
+
   append(value) {
     const nodeToAdd = new Node(value);
     this.tail.next = nodeToAdd;
     nodeToAdd.parent = this.tail;
     this.tail = nodeToAdd;
   }
+
   prepend(value) {
     const nodeToAdd = new Node(value);
     nodeToAdd.next = this.head;
     this.head.parent = nodeToAdd;
     this.head = nodeToAdd;
   }
+
   size() {
     let currentNode = this.head;
     let count = 1;
@@ -32,12 +34,15 @@ class LinkedList {
     }
     return count;
   }
+
   getHead() {
     return this.head;
   }
+
   getTail() {
     return this.tail;
   }
+
   at(index) {
     let currentNode = this.head;
     let currentIndex = 0;
@@ -50,11 +55,13 @@ class LinkedList {
     }
     throw new Error("Index out of bounds");
   }
+
   pop() {
     let lastNode = this.tail;
     this.tail = this.tail.parent;
     return lastNode;
   }
+
   contains(value) {
     let currentNode = this.head;
     while (currentNode != null) {
@@ -65,6 +72,7 @@ class LinkedList {
     }
     return false;
   }
+
   find(value) {
     let currentNode = this.head;
     let i = -1;
@@ -77,6 +85,7 @@ class LinkedList {
     }
     return null;
   }
+
   toString() {
     let currentNode = this.head;
     let res = `(${currentNode.value})`;
@@ -86,6 +95,7 @@ class LinkedList {
     }
     return res;
   }
+
   insertAt(value, index) {
     let currentNode = this.head;
     const nodeToAdd = new Node(value);
@@ -97,6 +107,7 @@ class LinkedList {
     currentNode.next.parent = nodeToAdd;
     currentNode.next = nodeToAdd;
   }
+
   removeAt(index) {
     let currentNode = this.head;
     for (let i = 0; i < index; i++) {
